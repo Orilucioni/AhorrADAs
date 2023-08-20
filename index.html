@@ -11,13 +11,13 @@
     </head>
     <body>
         <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-              <a class="navbar-item " href="https://bulma.io">
-                <i class="fa-solid fa-hand-holding-dollar is-size-2">AhorrADAs</i> 
+        <nav class="has-background-light navbar " role="navigation" aria-label="main navigation">
+            <div class="navbar-brand mt-3 mb-3 ml-3">
+              <a class="navbar-item" href="https://bulma.io">
+                <i class="fa-solid fa-hand-holding-dollar is-size-2"></i> <p class="has-text-weight-bold is-size-2">AhorrADAs</p> 
               </a>
               </div>
-              <div class="navbar-end">
+              <div class="navbar-end mt-3 mb-3 mr-3">
                 <div class="navbar-item">
                   <div class="buttons">
                     <a class="button is-light">
@@ -36,9 +36,9 @@
           </nav>
         </header>
         <main>
-          <section class="container is-flex-direction-column mt-6" >
-            <h2 class="title is-2">Nueva seccion</h2>
-            <form class=" is-flex-direction-column is-flex">
+          <section class=" box is-flex-direction-column mt-6" >
+            <h2 class="title is-2 has-text-weight-bold">Nueva operacion</h2>
+            <form class=" is-flex-direction-column is-flex has-text-weight-bold">
               <label for="input-description">Descripcion</label>
               <input type="text" id="input-description">
               <label for="input-monto">Monto</label>
@@ -57,15 +57,43 @@
                 <option value="trabajo">Trabajo</option>
               </select>
               <label for="input-date">Fecha</label>
-              <input type="datetime" id="input-date">
+              <input type="date" id="input-date">
             </form>
-            <div class="is-justify-content-end">
-            <button class="button">Cancelar</button>
-            <button class="button">Agregar</button>
+            <div class="is-justify-content-flex-end">
+            <button class="button ">Cancelar</button>
+            <button class="button has-background-dark has-text-primary-light">Agregar</button>
           </div> 
         </section>
-        <section class="container is-flex-direction-column mt-6" >
-          <h2 class="title is-2">Nueva seccion</h2>
+        <section class="has-background-light box is-flex-direction-column mt-6 has-text-weight-bold" >
+          <h2 class="title is-2">Categorias</h2>
+          <form class=" is-flex-direction-column is-flex has-text-weight-bold">
+            <label for="input-name">Nombre</label>
+            <div>
+            <input type="text" id="input-name"> <button class="button button has-background-dark has-text-primary-light">Agregar</button>
+            </div>
+          </form>
+          <ul class="is-flex-direction-column is-flex">
+            <li>Servicio</li> 
+            <div>
+              <button class="button">Editar</button> <button class="button">Eliminar</button>
+            </div> 
+            <li>Salidas</li> 
+            <div>
+              <button class="button">Editar</button> <button class="button">Eliminar</button>
+            </div> 
+            <li>Educacion</li> 
+            <div>
+              <button class="button">Editar</button> <button class="button">Eliminar</button>
+            </div> 
+            <li>Transporte</li> 
+            <div>
+              <button class="button">Editar</button> <button class="button">Eliminar</button>
+            </div> 
+            <li>Trabajo</li> 
+            <div>
+              <button class="button">Editar</button> <button class="button">Eliminar</button>
+            </div> 
+          </ul>
         </section>
         </main>
     </body>
