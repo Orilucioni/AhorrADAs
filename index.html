@@ -1,0 +1,73 @@
+<html>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://kit.fontawesome.com/7d206fa834.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item " href="https://bulma.io">
+                <i class="fa-solid fa-hand-holding-dollar is-size-2">AhorrADAs</i> 
+              </a>
+              </div>
+              <div class="navbar-end">
+                <div class="navbar-item">
+                  <div class="buttons">
+                    <a class="button is-light">
+                      <strong> <i class="fa-solid fa-chart-line"></i> Balance</strong>
+                    </a>
+                    <a class="button is-light">
+                        <i class="fa-solid fa-tag"></i> Categorias
+                    </a>
+                    <a class="button is-light">
+                        <i class="fa-solid fa-chart-pie"></i> Reportes
+                      </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </header>
+        <main>
+          <section class="container is-flex-direction-column mt-6" >
+            <h2 class="title is-2">Nueva seccion</h2>
+            <form class=" is-flex-direction-column is-flex">
+              <label for="input-description">Descripcion</label>
+              <input type="text" id="input-description">
+              <label for="input-monto">Monto</label>
+              <input type="number" id="input-monto">
+              <label for="select-type">Tipo</label>
+              <select id="select-type"> 
+                <option value="gasto">Gasto</option>
+                <option value="ganancia">Ganancia</option>
+              </select>
+              <label for="select-category">Categorias</label>
+              <select id="select-category">
+                <option value="servicios">Servicios</option>
+                <option value="Salidas">Salidas</option>
+                <option value="educacion">Educacion</option>
+                <option value="transporte">Transporte</option>
+                <option value="trabajo">Trabajo</option>
+              </select>
+              <label for="input-date">Fecha</label>
+              <input type="datetime" id="input-date">
+            </form>
+            <div class="is-justify-content-end">
+            <button class="button">Cancelar</button>
+            <button class="button">Agregar</button>
+          </div> 
+        </section>
+        <section class="container is-flex-direction-column mt-6" >
+          <h2 class="title is-2">Nueva seccion</h2>
+        </section>
+        </main>
+    </body>
+    </html>
+</html>

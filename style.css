@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    background-color: #170312;
+    color: #97D8B2;;
+}
+
+nav {
+    background-color: #440f44;
+}
+
+i {
+    padding-right: 10%;
+}
+
+label {
+    margin: 1% 0;
+}
+
+section {
+    margin: 10%;
+}
+form {
+    margin: 2%
+}
