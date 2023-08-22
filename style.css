@@ -32,3 +32,26 @@ ul {
     width: 85%;
     margin-right: 1%;
 }
+/* estilos de seccion de balance y reportes */
+.columns{
+    justify-content: center;
+}
+.main-container{
+    height: 70vh;
+} 
+.operaciones-container{
+    background-color: blueviolet;
+    height: 70vh;
+    margin-left: 10px;
+}
+.balance-section{
+    background-color: yellow;
+    height: 32vh;
+}
+.filters-section{
+    background-color: orange;
+    height: 50vh;
+}
+h2{
+    font-weight: 700px;
+}
