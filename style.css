@@ -31,12 +31,13 @@ ul {
     justify-content: center;
 }
 .main-container{
-    height: 70vh;
-    padding-bottom: 30vh;
+    height: 100vh;
 } 
-.operaciones-container{
+.operaciones-container,
+.categorias-section,
+.nueva-operacion-section
+{
     height: 70vh;
-    margin-left: 10px;
 }
 .balance-section{
     height: 32vh;
