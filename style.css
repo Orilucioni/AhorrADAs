@@ -2,19 +2,15 @@ body {
     margin: 0;
     background-color: #170312;
 }
-
 i {
     padding-right: 5%;
 }
-
 label {
     margin: 1% 0;
 }
-
- .box {
+.box {
     margin-top: 2%;
 }
-
  input {
     font-size: 16px;
     padding: 1%;
@@ -23,7 +19,6 @@ select {
     font-size: 16px;
     padding: 1%;
 }
-
 ul {
     display: flex;
 }
