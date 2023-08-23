@@ -11,9 +11,8 @@ label {
     margin: 1% 0;
 }
 
-.box {
-    margin: 20%;
-    padding: 2%;
+ .box {
+    margin-top: 2%;
 }
 
  input {
@@ -38,6 +37,7 @@ ul {
 }
 .main-container{
     height: 70vh;
+    padding-bottom: 30vh;
 } 
 .operaciones-container{
     height: 70vh;
