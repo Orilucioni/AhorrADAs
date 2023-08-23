@@ -40,16 +40,13 @@ ul {
     height: 70vh;
 } 
 .operaciones-container{
-    background-color: blueviolet;
     height: 70vh;
     margin-left: 10px;
 }
 .balance-section{
-    background-color: yellow;
     height: 32vh;
 }
 .filters-section{
-    background-color: orange;
     height: 50vh;
 }
 h2{
