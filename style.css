@@ -58,3 +58,6 @@ ul {
 h2{
     font-weight: 700px;
 }
+.hide-slide{
+    display: none;
+}
