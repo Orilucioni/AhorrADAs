@@ -31,10 +31,11 @@ ul {
     justify-content: center;
 }
 .main-container{
-    height: 100vh;
+    height: 150vh; 
 } 
 .categorias-section,
-.nueva-operacion-section
+.nueva-operacion-section,
+.main-container
 {
     margin-top: 10vh;
     margin-bottom: 10vh;
@@ -43,10 +44,16 @@ ul {
     margin-top: 10vh;
 }
 .balance-section{
-    height: 32vh;
+    height: 45vh;
+}
+.operaciones-container h2{
+    padding-left: 5%;
+}
+.operaciones-container{
+    height: 100vh;
 }
 .filters-section{
-    height: 50vh;
+    height: 75vh;
 }
 h2{
     font-weight: 700px;
