@@ -44,16 +44,16 @@ ul {
     margin-top: 10vh;
 }
 .balance-section{
-    height: 45vh;
+    height: 40%;
 }
 .operaciones-container h2{
     padding-left: 5%;
 }
 .operaciones-container{
-    height: 100vh;
+    height: 80%;
 }
 .filters-section{
-    height: 75vh;
+    height: 60%;
 }
 h2{
     font-weight: 700px;
