@@ -14,22 +14,22 @@
         <nav class="has-background-light navbar " role="navigation" aria-label="main navigation">
             <div class="navbar-brand mt-3 mb-3 ml-3">
               <a class="navbar-item" href="https://bulma.io">
-                <i class="fa-solid fa-hand-holding-dollar is-size-2"></i> <p class="has-text-weight-bold is-size-2">AhorrADAs</p> 
+                <i class="fa-solid fa-hand-holding-dollar is-size-2"></i> 
+                <p class="has-text-weight-bold is-size-2">AhorrADAs</p> 
               </a>
-              </div>
-              <div class="navbar-end mt-3 mb-3 mr-3">
-                <div class="navbar-item">
-                  <div class="buttons">
-                    <a class="button is-light">
-                      <strong> <i class="fa-solid fa-chart-line"></i> Balance</strong>
-                    </a>
-                    <a class="button is-light">
-                        <i class="fa-solid fa-tag"></i> Categorias
-                    </a>
-                    <a class="button is-light">
-                        <i class="fa-solid fa-chart-pie"></i> Reportes
-                      </a>
-                  </div>
+            </div>
+            <div class="navbar-end mt-3 mb-3 mr-3">
+              <div class="navbar-item">
+                <div class="buttons">
+                  <a class="button is-light">
+                    <i class="fa-solid fa-chart-line"></i> Balance
+                  </a>
+                  <a class="button is-light">
+                      <i class="fa-solid fa-tag"></i> Categorias
+                  </a>
+                  <a class="button is-light">
+                      <i class="fa-solid fa-chart-pie"></i> Reportes
+                  </a>
                 </div>
               </div>
             </div>
@@ -39,18 +39,20 @@
           <!-- inicia seccion principal con asides y balance -->
             <section class="container main-container">
               <div class="columns">
-                  <div class="is-one-quarter main-section column"> 
-                      <div class="balance-section box ">
+                  <div class="is-one-quarter main-section column aside-paddin"> 
+                      <div class="balance-section box">
                           <h2 class="has-text-weight-bold is-size-3">Balance</h2>
-                          <div class="columns mt-5">
-                              <div class="column">
+                          <div class="columns mt-5 balance-container-items">
+                              <div class="balance-items">
                                   <p class="mt-3 is-size-5">Ganancias</p>
-                                  <p class="mt-3 is-size-5">Gastos</p>
-                                  <h4 class="mt-4 is-size-4">Total</h4>
-                              </div>
-                              <div class="column has-text-right">
                                   <p class="mt-3 is-size-5">+$0</p>
+                              </div>
+                              <div class="balance-items">
+                                  <p class="mt-3 is-size-5">Gastos</p>
                                   <p class="mt-3 is-size-5">-$0</p>
+                              </div>
+                              <div class="balance-items">
+                                  <h4 class="mt-4 is-size-4">Total</h4>
                                   <p class="mt-4 is-size-4">$0</p>
                               </div>
                           </div>
@@ -61,48 +63,42 @@
                               <p class="ocultar-filtros has-text-right column">Ocultar filtros</p>
                               <!-- <p class="mostrar-filtros">Mostrar filtros</p> --> 
                           </div>
-                          <p class="has-text-weight-bold mt-3">Tipo</p>
-                          <div class="select is-normal">
-                              <select id="tipo-select" class="mt-2">
-                                  <option value="Todos">Todos</option>
-                                  <option value="Gasto">Gasto</option>
-                                  <option value="Ganancia">Ganancia</option>
-                              </select>
-                          </div>
+                          <p class="has-text-weight-bold mt-3">Tipo</p>                         
+                          <select id="tipo-select" class="mt-2">
+                              <option value="Todos">Todos</option>
+                              <option value="Gasto">Gasto</option>
+                              <option value="Ganancia">Ganancia</option>
+                          </select>
                           <p class="has-text-weight-bold mt-3">Categoría</p>
-                          <div class="select is-normal">
-                              <select id="categoria-select" class="mt-2">
-                                  <option value="Todas">Todas</option>
-                                  <option value="Comida">Comida</option>
-                                  <option value="Servicios">Servicios</option>
-                                  <option value="Salidas">Salidas</option>
-                                  <option value="Educacion">Educacion</option>
-                                  <option value="Transporte">Transporte</option>
-                                  <option value="Trabajo">Trabajo</option>
-                              </select>
-                          </div>
+                          <select id="categoria-select" class="mt-2">
+                              <option value="Todas">Todas</option>
+                              <option value="Comida">Comida</option>
+                              <option value="Servicios">Servicios</option>
+                              <option value="Salidas">Salidas</option>
+                              <option value="Educacion">Educacion</option>
+                              <option value="Transporte">Transporte</option>
+                              <option value="Trabajo">Trabajo</option>
+                          </select>
                           <p class="has-text-weight-bold mt-3">Desde</p>
                           <form class="date-select-filtros mt-2">
                               <input type="date" id="date-select" class="input is-normal">
                           </form>
                           <p class="has-text-weight-bold mt-3">Ordenar por</p>
-                          <div class="select is-normal">
-                              <select id="order-select-filtros" class="mt-2">
-                                  <option value="Más reciente">Más reciente</option>
-                                  <option value="Menos reciente">Menos reciente</option>
-                                  <option value="Mayor monto">Mayor monto</option>
-                                  <option value="Menor monto">Menor monto</option>
-                                  <option value="A/Z">A/Z</option>
-                                  <option value="Z/A">Z/A</option>
-                              </select>
-                          </div>
+                          <select id="order-select-filtros" class="mt-2">
+                              <option value="Más reciente">Más reciente</option>
+                              <option value="Menos reciente">Menos reciente</option>
+                              <option value="Mayor monto">Mayor monto</option>
+                              <option value="Menor monto">Menor monto</option>
+                              <option value="A/Z">A/Z</option>
+                              <option value="Z/A">Z/A</option>
+                          </select>
                       </div>
                   </div>
                   <div class="operaciones-container column box is-half">
                       <div class="operaciones-items pt-4">
-                          <div class="columns button-space">
+                          <div class="button-space">
                               <h2 class="has-text-weight-bold is-size-3">Operaciones</h2>
-                              <div class="column is-offset-1">
+                              <div>
                                   <button class="nueva-operacion button is-small is-info is-right">+ Nueva operacion</button>
                               </div>
                           </div>
@@ -119,7 +115,7 @@
             </section>
             <!-- termina seccion principal con asides y balance -->
             <!-- inicia seccion de nueva operacion -->
-            <section class="nueva-operacion-section">
+            <section class="nueva-operacion-section hide-slide">
               <div class="columns">
                 <div class="nueva-operacion-container container column is-half">
                   <div class=" box mt-6">
@@ -157,7 +153,7 @@
             </section>
           <!-- termina seccion de nueva operacion -->
           <!-- inicia seccion de categorías -->
-          <section class="categorias-section" >
+          <section class="categorias-section hide-slide" >
             <div class="columns">
               <div class="categorias-container container column is-half">
                 <div class="has-background-light box mt-6 has-text-weight-bold">
@@ -198,7 +194,7 @@
           </section>
           <!-- termina seccion de categorías -->
           <!-- inicia la seccion de reportes -->
-          <section class="reportes-section">
+          <section class="reportes-section hide-slide">
             <div class="columns">
               <div class="reportes-container container column is-half">
                   <div class="reportes-items box pt-4 pb-6">
