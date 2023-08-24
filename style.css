@@ -33,11 +33,14 @@ ul {
 .main-container{
     height: 100vh;
 } 
-.operaciones-container,
 .categorias-section,
 .nueva-operacion-section
 {
-    height: 70vh;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+.reportes-section{
+    margin-top: 10vh;
 }
 .balance-section{
     height: 32vh;
