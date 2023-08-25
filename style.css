@@ -58,3 +58,12 @@ ul {
 h2{
     font-weight: 700px;
 }
+
+.categorias-list-items{
+    height: 700px;
+}
+
+.li-item {
+    display: flex;
+    justify-content: space-between;
+}
