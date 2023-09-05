@@ -8,10 +8,8 @@ i {
 label {
     margin: 1% 0;
 }
-.box {
-    margin-top: 2%;
-}
- input {
+
+input {
     font-size: 16px;
     padding: 1%;
 } 
@@ -30,15 +28,18 @@ ul {
 .columns{
     justify-content: center;
 }
+.aside-paddin{
+    padding-top: 0;
+}
 .main-container{
-    height: 150vh; 
+    height: 120vh; 
 } 
 .categorias-section,
 .nueva-operacion-section,
 .main-container
 {
     margin-top: 10vh;
-    margin-bottom: 10vh;
+    padding-bottom: 10vh;
 }
 .reportes-section{
     margin-top: 10vh;
