@@ -21,15 +21,15 @@
             <div class="navbar-end mt-3 mb-3 mr-3">
               <div class="navbar-item">
                 <div class="buttons">
-                  <a class="button is-light">
+                  <button class="button is-light" id="button-balance-header">
                     <i class="fa-solid fa-chart-line"></i> Balance
-                  </a>
-                  <a class="button is-light">
+                  </button>
+                  <button class="button is-light" id="button-categorias-header">
                       <i class="fa-solid fa-tag"></i> Categorias
-                  </a>
-                  <a class="button is-light">
+                  </button>
+                  <button class="button is-light" id="button-reportes-header">
                       <i class="fa-solid fa-chart-pie"></i> Reportes
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@
         </header>
         <main>
           <!-- inicia seccion principal con asides y balance -->
-            <section class="container main-container">
+            <section class="container main-container show-slide" id="main-container">
               <div class="columns">
                   <div class="is-one-quarter main-section column aside-paddin"> 
                       <div class="balance-section box">
@@ -115,7 +115,7 @@
             </section>
             <!-- termina seccion principal con asides y balance -->
             <!-- inicia seccion de nueva operacion -->
-            <section class="nueva-operacion-section hide-slide">
+            <section class="nueva-operacion-section hide-slide" id="nueva-operacion-section">
               <div class="columns">
                 <div class="nueva-operacion-container container column is-half">
                   <div class=" box mt-6">
@@ -153,7 +153,7 @@
             </section>
           <!-- termina seccion de nueva operacion -->
           <!-- inicia seccion de categorías -->
-          <section class="categorias-section hide-slide" >
+          <section class="categorias-section hide-slide" id="categorias-section">
             <div class="columns">
               <div class="categorias-container container column is-half">
                 <div class="has-background-light box mt-6 has-text-weight-bold">
@@ -194,7 +194,7 @@
           </section>
           <!-- termina seccion de categorías -->
           <!-- inicia la seccion de reportes -->
-          <section class="reportes-section hide-slide">
+          <section class="reportes-section hide-slide" id="reportes-section">
             <div class="columns">
               <div class="reportes-container container column is-half">
                   <div class="reportes-items box pt-4 pb-6">
@@ -214,6 +214,6 @@
           </section>
         <!-- termina la seccion de reportes -->
         </main>
+      <script src="script.js"></script> 
     </body>
-    </html>
 </html>

@@ -62,6 +62,9 @@ h2{
 .hide-slide{
     display: none;
 }
+.show-slide{
+    display: block;
+}
 .balance-items,
 .button-space{
     display: flex;
