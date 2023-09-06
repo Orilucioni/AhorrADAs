@@ -31,17 +31,12 @@ ul {
 .aside-paddin{
     padding-top: 0;
 }
-.main-container{
-    height: 120vh; 
-} 
 .categorias-section,
 .nueva-operacion-section,
-.main-container
+.main-container,
+.reportes-section
 {
-    margin-top: 10vh;
-    padding-bottom: 10vh;
-}
-.reportes-section{
+    height: 120vh;
     margin-top: 10vh;
 }
 .balance-section{

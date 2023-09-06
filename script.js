@@ -3,6 +3,7 @@
 const headerButtonBalance = document.getElementById("button-balance-header");
 const headerButtonCategorias = document.getElementById("button-categorias-header");
 const headerButtonReportes = document.getElementById("button-reportes-header");
+const nuevaOperacionButton = document.getElementById("nueva-operacion")
 //variables de secciones
 const mainContainer = document.getElementById("main-container");
 const nuevaOperacionSection = document.getElementById("nueva-operacion-section");
@@ -17,6 +18,8 @@ headerButtonCategorias.addEventListener("click", ()=>{
     mainContainer.classList.remove("show-slide");
     reportesSection.classList.add("hide-slide");
     reportesSection.classList.remove("show-slide");
+    nuevaOperacionSection.classList.add("hide-slide")
+    nuevaOperacionSection.classList.remove("show-slide")
 });
 headerButtonReportes.addEventListener("click", ()=>{
     reportesSection.classList.add("show-slide")
@@ -25,12 +28,26 @@ headerButtonReportes.addEventListener("click", ()=>{
     mainContainer.classList.remove("show-slide");
     categoriasSection.classList.add("hide-slide");
     categoriasSection.classList.remove("show-slide"); 
+    nuevaOperacionSection.classList.add("hide-slide")
+    nuevaOperacionSection.classList.remove("show-slide")
 });
 headerButtonBalance.addEventListener("click", ()=>{  
     mainContainer.classList.add("show-slide");
     mainContainer.classList.remove("hide-slide");
-    categoriasSection.classList.add("show-slide")
-    categoriasSection.classList.remove("hide-slide") 
+    categoriasSection.classList.add("hide-slide")
+    categoriasSection.classList.remove("show-slide") 
     reportesSection.classList.add("hide-slide")
     reportesSection.classList.remove("show-slide")
+    nuevaOperacionSection.classList.add("hide-slide")
+    nuevaOperacionSection.classList.remove("show-slide")
 });
+nuevaOperacionButton.addEventListener("click", ()=>{  
+    nuevaOperacionSection.classList.add("show-slide");
+    nuevaOperacionSection.classList.remove("hide-slide");
+    mainContainer.classList.add("hide-slide");
+    mainContainer.classList.remove("show-slide");
+    categoriasSection.classList.add("hide-slide")
+    categoriasSection.classList.remove("show-slide") 
+    reportesSection.classList.add("hide-slide")
+    reportesSection.classList.remove("show-slide")
+})
