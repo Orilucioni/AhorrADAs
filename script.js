@@ -81,78 +81,50 @@ let categoryList = [
      ]
 
 const createArray = (lista) => {
-    // let newItem ={
-    //     "nombre": $("inputName").value ,
-    //     "id": randomID()
-    // }
-    // categoryList.push(newItem)
-    createList(categoryList)
+     let newItem ={
+         "nombre": $("inputName").value ,
+         "id": randomID()
+     }
+     categoryList.push(newItem)
+     createList(categoryList)
 }
 
 console.log(categoryList)
 
-// const createItems = (categoryList) => {
-//     categoryList.forEach((items) => {
-//         console.log(items)
-//         $("categoryUl").innerHTML = ""
-//         $("categoryUl").innerHTML +=`<li>Servicio</li> 
-//         <div>
-//           <button class="button">Editar</button> <button class="button">Eliminar</button>
-//         </div> 
-//         <li>Salidas</li> 
-//         <div>
-//           <button class="button">Editar</button> <button class="button">Eliminar</button>
-//         </div> 
-//         <li>Educacion</li> 
-//         <div>
-//           <button class="button">Editar</button> <button class="button">Eliminar</button>
-//         </div> 
-//         <li>Transporte</li> 
-//         <div>
-//           <button class="button">Editar</button> <button class="button">Eliminar</button>
-//         </div> 
-//         <li>Trabajo</li> 
-//         <div>
-//           <button class="button">Editar</button> <button class="button">Eliminar</button>
-//         </div> `
-//     })
-// }
-// createItems(categoryList)
-
-
  const createList = (categoryList) => {
-      $("categoryUl").innerHTML = ""
+      $("categoryUl").innerHTML = "";
       categoryList.forEach((item) => {
           console.log(item)
-             let liContent = document.createTextNode(`${item.index}`)
-             let liItem = document.createElement("li")
-// //         //    let deleteButton = document.createElement("button")
-// //         //    deleteButton.addEventListener("click", () => deleteItem(item))
-// //         //    let editButton = document.createElement("button")
-// //          //  editButton.addEventListener("click", () => editItem(item))
-            liItem.classList.add("list-item")
-             liItem.appendChild(liContent)
-// //         //    liItem.appendChild(deleteButton)
-// //         //     liItem.appendChild(editButton)
+             let liContent = document.createTextNode(`${item.nombre}`);
+             let liItem = document.createElement("li");
+             let deleteButton = document.createElement("button")
+             deleteButton.addEventListener("click", () => deleteItem(item))
+            //  let editButton = document.createElement("button")
+            // editButton.addEventListener("click", () => editItem(item))
+            liItem.classList.add("list-item");
+             liItem.appendChild(liContent);
+             liItem.appendChild(deleteButton)
+            //   liItem.appendChild(editButton)
              $("categoryUl").appendChild(liItem)   
       
     });
     }
 
-$ ("addButton").addEventListener("click", createArray)
-  $ ("addButton").addEventListener("click", createList)
+$ ("addButton").addEventListener("click", () => createArray(categoryList))
+$ ("addButton").addEventListener("click", () => createList(categoryList))
 
 // // Seccion categorias boton eliminar
-// const deleteItem = (item) => {
-// const itemIndex = categoryList.indexOf(item)
-// categoryList.splice(itemIndex,1)
-// createList(categoryList)
-// }
+ const deleteItem = (item) => {
+ const itemIndex = categoryList.indexOf(item)
+ categoryList.splice(itemIndex,1)
+ createList(categoryList)
+ }
 
-// $("deleteButton").addEventListener("click",deleteItem)
+//  $ ("deleteButton").addEventListener("click", () => deleteItem(categoryList))
 
 // // Seccion categorias boton editar
 
-// // const editButton = (item) => {
+//  const editButton = (item) => {
 // //     let nuevoValor= 
 // // }
+
