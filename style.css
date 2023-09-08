@@ -36,7 +36,7 @@ ul {
 .main-container,
 .reportes-section
 {
-    height: 120vh;
+    height: 700px;
     margin-top: 10vh;
 }
 .balance-section{
@@ -55,9 +55,6 @@ h2{
     font-weight: 700px;
 }
 
-.categorias-list-items{
-    height: 700px;
-}
 .show-slide{
     display: block;
 }

@@ -120,11 +120,10 @@ $ ("addButton").addEventListener("click", () => createList(categoryList))
  createList(categoryList)
  }
 
-//  $ ("deleteButton").addEventListener("click", () => deleteItem(categoryList))
 
 // // Seccion categorias boton editar
 
-//  const editButton = (item) => {
-// //     let nuevoValor= 
-// // }
+//   const editButton = (item) => {
+//      let nuevoValor= 
+//  }
 
