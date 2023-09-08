@@ -2,21 +2,14 @@ body {
     margin: 0;
     background-color: #170312;
 }
-
 i {
     padding-right: 5%;
 }
-
 label {
     margin: 1% 0;
 }
 
-.box {
-    margin: 20%;
-    padding: 2%;
-}
-
- input {
+input {
     font-size: 16px;
     padding: 1%;
 } 
@@ -24,11 +17,52 @@ select {
     font-size: 16px;
     padding: 1%;
 }
-
 ul {
     display: flex;
 }
 #input-name {
     width: 85%;
     margin-right: 1%;
+}
+/* estilos de seccion de balance y reportes */
+.columns{
+    justify-content: center;
+}
+.aside-paddin{
+    padding-top: 0;
+}
+.categorias-section,
+.nueva-operacion-section,
+.main-container,
+.reportes-section
+{
+    height: 120vh;
+    margin-top: 10vh;
+}
+.balance-section{
+    height: 40%;
+}
+.operaciones-container h2{
+    padding-left: 5%;
+}
+.operaciones-container{
+    height: 80%;
+}
+.filters-section{
+    height: 60%;
+}
+h2{
+    font-weight: 700px;
+}
+
+.categorias-list-items{
+    height: 700px;
+}
+.show-slide{
+    display: block;
+}
+.balance-items,
+.button-space{
+    display: flex;
+    justify-content: space-between;
 }
