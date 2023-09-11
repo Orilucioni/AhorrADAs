@@ -36,7 +36,7 @@ ul {
 .main-container,
 .reportes-section
 {
-    height: 700px;
+    height: 120vh;
     margin-top: 10vh;
 }
 .balance-section{
@@ -58,8 +58,20 @@ h2{
 .show-slide{
     display: block;
 }
+.hide-slide{
+    display: none;
+}
+
 .balance-items,
 .button-space{
     display: flex;
     justify-content: space-between;
 }
+
+.balance-container-items{
+    display: flex;
+    flex-direction: column;
+}
+.filters-section select{
+    width: 100%;
+} 

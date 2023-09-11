@@ -1,3 +1,5 @@
+const $ = (selector) => document.getElementById(selector);
+
 //botones del header para visibilizar distintas areas
 //variables de botones del header
 const headerButtonBalance = document.getElementById("button-balance-header");
@@ -20,6 +22,7 @@ headerButtonCategorias.addEventListener("click", ()=>{
     reportesSection.classList.remove("show-slide");
     nuevaOperacionSection.classList.add("hide-slide")
     nuevaOperacionSection.classList.remove("show-slide")
+    $("containerEdit").classList.add("hide-slide")
 });
 headerButtonReportes.addEventListener("click", ()=>{
     reportesSection.classList.add("show-slide")
@@ -30,6 +33,7 @@ headerButtonReportes.addEventListener("click", ()=>{
     categoriasSection.classList.remove("show-slide"); 
     nuevaOperacionSection.classList.add("hide-slide")
     nuevaOperacionSection.classList.remove("show-slide")
+    $("containerEdit").classList.add("hide-slide")
 });
 headerButtonBalance.addEventListener("click", ()=>{  
     mainContainer.classList.add("show-slide");
@@ -40,6 +44,7 @@ headerButtonBalance.addEventListener("click", ()=>{
     reportesSection.classList.remove("show-slide")
     nuevaOperacionSection.classList.add("hide-slide")
     nuevaOperacionSection.classList.remove("show-slide")
+    $("containerEdit").classList.add("hide-slide")
 });
 nuevaOperacionButton.addEventListener("click", ()=>{  
     nuevaOperacionSection.classList.add("show-slide");
@@ -50,9 +55,10 @@ nuevaOperacionButton.addEventListener("click", ()=>{
     categoriasSection.classList.remove("show-slide") 
     reportesSection.classList.add("hide-slide")
     reportesSection.classList.remove("show-slide")
+    $("containerEdit").classList.add("hide-slide")
 })
 
-const $ = (selector) => document.getElementById(selector);
+
 
 // Realizamos la creacion de las categorias
 const randomID = () => self.crypto.randomUUID()
@@ -87,6 +93,7 @@ const createArray = (lista) => {
      }
      categoryList.push(newItem)
      createList(categoryList)
+     selectCategories(categoryList)
 }
 
 console.log(categoryList)
@@ -98,20 +105,29 @@ console.log(categoryList)
              let liContent = document.createTextNode(`${item.nombre}`);
              let liItem = document.createElement("li");
              let deleteButton = document.createElement("button")
+             deleteButton.classList.add("button")
+             let textDeleteButton = document.createTextNode("Eliminar")
+             deleteButton.appendChild(textDeleteButton)
              deleteButton.addEventListener("click", () => deleteItem(item))
-            //  let editButton = document.createElement("button")
-            // editButton.addEventListener("click", () => editItem(item))
+            let editButton = document.createElement("button")
+            editButton.classList.add("button")
+            let textEditButton = document.createTextNode("Editar")
+            editButton.appendChild(textEditButton)
+            editButton.addEventListener("click", () => editItem(item))
             liItem.classList.add("list-item");
              liItem.appendChild(liContent);
              liItem.appendChild(deleteButton)
-            //   liItem.appendChild(editButton)
-             $("categoryUl").appendChild(liItem)   
+               liItem.appendChild(editButton)
+             $("categoryUl").appendChild(liItem)  
+              
       
     });
     }
 
 $ ("addButton").addEventListener("click", () => createArray(categoryList))
-$ ("addButton").addEventListener("click", () => createList(categoryList))
+$ ("addButton").addEventListener("click", createList(categoryList))
+$ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit())
+$ ("edit-button").addEventListener("click", () => updateItem())
 
 // // Seccion categorias boton eliminar
  const deleteItem = (item) => {
@@ -123,7 +139,35 @@ $ ("addButton").addEventListener("click", () => createList(categoryList))
 
 // // Seccion categorias boton editar
 
-//   const editButton = (item) => {
-//      let nuevoValor= 
-//  }
+   const editItem = (item) => {
+    $("categorias-section").classList.add("hide-slide")
+    $("containerEdit").classList.remove("hide-slide");
+    }
+    
+    const updateItem = () =>{
+        let newValue = $("edit-input").value;
+        console.log(newValue)  
+        let itemIndex = categoryList.indexOf(item)    
+    }
+    
 
+const hideSeccionEdit = () => {
+    $("containerEdit").classList.add("hide-slide");
+    $("categorias-section").classList.remove("hide-slide")
+}
+
+// Seccion Operaciones
+
+// Filtros por categorias
+
+const selectCategories = (categoryList) => {
+    $("categoria-select").innerHTML = ""
+    $("categoria-select").innerHTML += ` <option value="Todas">Todas</option>`
+    for (let category of categoryList) {
+        let option = document.createElement("option")
+        option.innerHTML= `${category.nombre}`
+        $("categoria-select").appendChild(option)
+    }
+}
+
+selectCategories(categoryList)
