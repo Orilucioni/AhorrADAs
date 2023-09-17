@@ -58,7 +58,23 @@ nuevaOperacionButton.addEventListener("click", ()=>{
     $("containerEdit").classList.add("hide-slide")
 })
 
+// Funciones relacionadas al Local Storage
+const getData = () => {
+    return JSON.parse(localStorage.getItem("Ahorradas"))
+}
 
+const setData = (datos) => {
+    localStorage.setItem("Ahorradas", JSON.stringify({...getData(), ...datos}))
+}
+
+const getCategories = () => {
+    return getData()?.categorias
+}
+
+const ahorradas = getData() || {
+    categorias: [],
+    operaciones: [],
+}
 
 // Realizamos la creacion de las categorias
 const randomID = () => self.crypto.randomUUID()
@@ -100,28 +116,28 @@ console.log(categoryList)
 
  const createList = (categoryList) => {
       $("categoryUl").innerHTML = "";
-      categoryList.forEach((item) => {
-          console.log(item)
-             let liContent = document.createTextNode(`${item.nombre}`);
+      for (let {nombre, id} of categoryList) {
+             let liContent = document.createTextNode(nombre);
              let liItem = document.createElement("li");
              let deleteButton = document.createElement("button")
              deleteButton.classList.add("button")
+             deleteButton.setAttribute("id", '${id}')
              let textDeleteButton = document.createTextNode("Eliminar")
              deleteButton.appendChild(textDeleteButton)
-             deleteButton.addEventListener("click", () => deleteItem(item))
+             deleteButton.addEventListener("click", () => deleteItem(id))
             let editButton = document.createElement("button")
             editButton.classList.add("button")
+            editButton.setAttribute("id", '${id}')
             let textEditButton = document.createTextNode("Editar")
             editButton.appendChild(textEditButton)
-            editButton.addEventListener("click", () => editItem(item))
+            editButton.addEventListener("click", () => editItem(id))
             liItem.classList.add("list-item");
              liItem.appendChild(liContent);
              liItem.appendChild(deleteButton)
                liItem.appendChild(editButton)
              $("categoryUl").appendChild(liItem)  
               
-      
-    });
+    };
     }
 
 $ ("addButton").addEventListener("click", () => createArray(categoryList))
@@ -130,8 +146,8 @@ $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit())
 $ ("edit-button").addEventListener("click", () => updateItem())
 
 // // Seccion categorias boton eliminar
- const deleteItem = (item) => {
- const itemIndex = categoryList.indexOf(item)
+ const deleteItem = (id) => {
+ const itemIndex = categoryList.indexOf(id)
  categoryList.splice(itemIndex,1)
  createList(categoryList)
  }
