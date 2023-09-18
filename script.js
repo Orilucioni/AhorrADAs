@@ -129,9 +129,9 @@ console.log(categoryList)
     }
 createList(categoryList)
 
- const obtenerCategory = (idCategoria, categoryList) => {
-    return categoryList.find((categoria) => categoria.id === idCategoria)
- } 
+//  const obtenerCategory = (idCategoria, categoryList) => {
+//     return categoryList.find((categoria) => categoria.id === idCategoria)
+//  } 
 
 
   
@@ -157,22 +157,20 @@ $ ("addButton").addEventListener("click", createList(categoryList))
         };
         let updateCategories = getCategories().map((categoria) => 
          categoria.id === id ? { ...newCategory } : categoria)
-        createList(updateCategories);
+        createList(categoryList);
         // selectCategories(updateCategories)
-         setData( {categorias: updateCategories})
+        //  setData( {categorias: [], categorias: updateCategories})
         } 
     
     const editItem = (id) => {
      $("categorias-section").classList.add("hide-slide");
      $("containerEdit").classList.remove("hide-slide");
-     let categoryEdit = obtenerCategory(id, getCategories());
-     console.log(categoryEdit)
-    $("#edit-input").value = categoryEdit.nombre;
-    $("#edit-button").addEventListener("click", () => updateItem(categoryEdit.id))
+     let categoryEdit = categoryList.filter((categoria) => categoria.id === id);
+     console.log(categoryEdit);
+    $("edit-input").value = categoryEdit[0].nombre;
+    $("edit-button").addEventListener("click", () => updateItem(categoryEdit[0].id));
 
     }
-
-    editItem(categoryList)
      
 
 
@@ -181,7 +179,7 @@ $ ("addButton").addEventListener("click", createList(categoryList))
 //      $("categorias-section").classList.remove("hide-slide")
 //  }
 
-// // Seccion Operaciones
+
 
 // // Filtros por categorias
 
@@ -194,3 +192,7 @@ $ ("addButton").addEventListener("click", createList(categoryList))
          $("categoria-select").appendChild(option)
      }
  }
+// selectCategories(getCategories())
+// createList(getCategories())
+ // // Seccion Operaciones
+ 
