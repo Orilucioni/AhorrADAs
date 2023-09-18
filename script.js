@@ -60,15 +60,15 @@ nuevaOperacionButton.addEventListener("click", ()=>{
 
 // Funciones relacionadas al Local Storage
 const getData = () => {
-    return JSON.parse(localStorage.getItem("Ahorradas"))
+    return JSON.parse(localStorage.getItem("ahorradas"))
 }
 
 const setData = (datos) => {
-    localStorage.setItem("Ahorradas", JSON.stringify({...getData(), ...datos}))
+    localStorage.setItem("ahorradas", JSON.stringify({...getData(), ...ahorradas}))
 }
 
 const getCategories = () => {
-    return getData()?.categorias
+    return getData()?.categoryList
 }
 
 const ahorradas = getData() || {
@@ -79,7 +79,8 @@ const ahorradas = getData() || {
 // Realizamos la creacion de las categorias
 const randomID = () => self.crypto.randomUUID()
 
-let categoryList = [  
+
+let categoryList = getCategories() || [  
     {
         nombre:"Servicio",
         id: randomID()
@@ -109,7 +110,7 @@ const createArray = (lista) => {
      }
      categoryList.push(newItem)
      createList(categoryList)
-     selectCategories(categoryList)
+    //  selectCategories(categoryList)
 }
 
 console.log(categoryList)
@@ -117,73 +118,79 @@ console.log(categoryList)
  const createList = (categoryList) => {
       $("categoryUl").innerHTML = "";
       for (let {nombre, id} of categoryList) {
-             let liContent = document.createTextNode(nombre);
-             let liItem = document.createElement("li");
-             let deleteButton = document.createElement("button")
-             deleteButton.classList.add("button")
-             deleteButton.setAttribute("id", '${id}')
-             let textDeleteButton = document.createTextNode("Eliminar")
-             deleteButton.appendChild(textDeleteButton)
-             deleteButton.addEventListener("click", () => deleteItem(id))
-            let editButton = document.createElement("button")
-            editButton.classList.add("button")
-            editButton.setAttribute("id", '${id}')
-            let textEditButton = document.createTextNode("Editar")
-            editButton.appendChild(textEditButton)
-            editButton.addEventListener("click", () => editItem(id))
-            liItem.classList.add("list-item");
-             liItem.appendChild(liContent);
-             liItem.appendChild(deleteButton)
-               liItem.appendChild(editButton)
-             $("categoryUl").appendChild(liItem)  
-              
+        $("categoryUl").innerHTML += `<li class= "is-flex is-justify-content-space-between">
+        <p> ${nombre} </p>
+        <div> 
+            <button  onclick="editItem('${id}')" id="${id}" class= "button"> Editar </button>
+            <button  onclick="deleteItem('${id}')" id="${id}" class= "button"> Eliminar </button>  
+        </div>
+        </li>`        
     };
     }
+createList(categoryList)
+
+ const obtenerCategory = (idCategoria, categoryList) => {
+    return categoryList.find((categoria) => categoria.id === idCategoria)
+ } 
+
+
+  
 
 $ ("addButton").addEventListener("click", () => createArray(categoryList))
 $ ("addButton").addEventListener("click", createList(categoryList))
-$ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit())
-$ ("edit-button").addEventListener("click", () => updateItem())
+// $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit())
+// $ ("edit-button").addEventListener("click", () => updateItem())
 
-// // Seccion categorias boton eliminar
- const deleteItem = (id) => {
- const itemIndex = categoryList.indexOf(id)
- categoryList.splice(itemIndex,1)
- createList(categoryList)
+// // // Seccion categorias boton eliminar
+  const deleteItem = (id) => {
+  const itemIndex = categoryList.indexOf(id)
+  categoryList.splice(itemIndex,1)
+  createList(categoryList)
+  }
+
+
+// // // Seccion categorias boton editar
+    const updateItem = (id) =>{
+        let newCategory = {
+         id : id,
+         nombre: $("#edit-input").value
+        };
+        let updateCategories = getCategories().map((categoria) => 
+         categoria.id === id ? { ...newCategory } : categoria)
+        createList(updateCategories);
+        // selectCategories(updateCategories)
+         setData( {categorias: updateCategories})
+        } 
+    
+    const editItem = (id) => {
+     $("categorias-section").classList.add("hide-slide");
+     $("containerEdit").classList.remove("hide-slide");
+     let categoryEdit = obtenerCategory(id, getCategories());
+     console.log(categoryEdit)
+    $("#edit-input").value = categoryEdit.nombre;
+    $("#edit-button").addEventListener("click", () => updateItem(categoryEdit.id))
+
+    }
+
+    editItem(categoryList)
+     
+
+
+//  const hideSeccionEdit = () => {
+//      $("containerEdit").classList.add("hide-slide");
+//      $("categorias-section").classList.remove("hide-slide")
+//  }
+
+// // Seccion Operaciones
+
+// // Filtros por categorias
+
+ const selectCategories = (categoryList) => {
+     $("categoria-select").innerHTML = ""
+     $("categoria-select").innerHTML += ` <option value="Todas">Todas</option>`
+     for (let category of categoryList) {
+         let option = document.createElement("option")
+         option.innerHTML= `${category.nombre}`
+         $("categoria-select").appendChild(option)
+     }
  }
-
-
-// // Seccion categorias boton editar
-
-   const editItem = (item) => {
-    $("categorias-section").classList.add("hide-slide")
-    $("containerEdit").classList.remove("hide-slide");
-    }
-    
-    const updateItem = () =>{
-        let newValue = $("edit-input").value;
-        console.log(newValue)  
-        let itemIndex = categoryList.indexOf(item)    
-    }
-    
-
-const hideSeccionEdit = () => {
-    $("containerEdit").classList.add("hide-slide");
-    $("categorias-section").classList.remove("hide-slide")
-}
-
-// Seccion Operaciones
-
-// Filtros por categorias
-
-const selectCategories = (categoryList) => {
-    $("categoria-select").innerHTML = ""
-    $("categoria-select").innerHTML += ` <option value="Todas">Todas</option>`
-    for (let category of categoryList) {
-        let option = document.createElement("option")
-        option.innerHTML= `${category.nombre}`
-        $("categoria-select").appendChild(option)
-    }
-}
-
-selectCategories(categoryList)
