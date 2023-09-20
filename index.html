@@ -70,7 +70,7 @@
                               <option value="Ganancia">Ganancia</option>
                           </select>
                           <p class="has-text-weight-bold mt-3">Categoría</p>
-                          <select id="categoria-select" class="mt-2">
+                          <select id="categoria-select" class="mt-2 select-category">
                               <option value="Todas">Todas</option>
                           </select>
                           <p class="has-text-weight-bold mt-3">Desde</p>
@@ -126,20 +126,15 @@
                           <option value="ganancia">Ganancia</option>
                         </select>
                         <label for="select-category">Categorias</label>
-                        <select id="select-category">
-                          <option value="servicios">Servicios</option>
-                          <option value="Salidas">Salidas</option>
-                          <option value="educacion">Educacion</option>
-                          <option value="transporte">Transporte</option>
-                          <option value="trabajo">Trabajo</option>
+                        <select id="select-category" class="select-category">
                         </select>
                         <label for="input-date">Fecha</label>
                         <input type="date" id="input-date">
                       </form>
                     </div>
                     <div class="is-justify-content-flex-end">
-                      <button class="button " id="cancelledButtton">Cancelar</button>
-                      <button class="button has-background-dark has-text-primary-light">Agregar</button>
+                      <button class="button" id="cancelledButtton">Cancelar</button>
+                      <button class="button has-background-dark has-text-primary-light" id="addOperationButton">Agregar</button>
                     </div> 
                   </div>
                 </div>
