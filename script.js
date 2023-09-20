@@ -1,5 +1,5 @@
 const $ = (selector) => document.getElementById(selector);
-
+const $$ = (selector) => document.querySelectorAll(selector)
 //botones del header para visibilizar distintas areas
 //variables de botones del header
 const headerButtonBalance = document.getElementById("button-balance-header");
@@ -58,33 +58,57 @@ nuevaOperacionButton.addEventListener("click", ()=>{
     $("containerEdit").classList.add("hide-slide")
 })
 
+// Funciones relacionadas al Local Storage
 
+
+ const getData = () => {
+     return JSON.parse(localStorage.getItem("ahorradas"))
+ }
+  
+ const setData = (datos) => {
+     localStorage.setItem("ahorradas", JSON.stringify({...getData(), ...datos}))
+ }
+const getCategories = () => {
+     return getData().categorias;
+ }
+
+ const getOperations = () => {
+     return getData()?.operaciones;
+ }
+
+//  const ahorradas = getData() || {
+//       categorias: [],
+//        operaciones: [],
+//    }
+
+ 
 
 // Realizamos la creacion de las categorias
 const randomID = () => self.crypto.randomUUID()
 
-let categoryList = [  
+let categoryList = getCategories() || [  
     {
-        nombre:"Servicio",
-        id: randomID()
+        nombre: "Servicio",
+        id: randomID(),
     },
     {
-        nombre:"Salidas",
-        id: randomID()
+        nombre: "Salidas",
+        id: randomID(),
     },
     {
-        nombre:"Educacion",
-        id: randomID()
+        nombre: "Educacion",
+        id: randomID(),
     },
     {   
-        nombre:"Transporte",
-        id: randomID()
+        nombre: "Transporte",
+        id: randomID(),
     },
     {
-        nombre:"Trabajo",
-        id: randomID()
+        nombre: "Trabajo",
+        id: randomID(),
     },
-     ]
+     ];
+
 
 const createArray = (lista) => {
      let newItem ={
@@ -98,76 +122,102 @@ const createArray = (lista) => {
 
 console.log(categoryList)
 
- const createList = (categoryList) => {
+const createList = (categoryList)=> {
+    console.log(categoryList);
       $("categoryUl").innerHTML = "";
-      categoryList.forEach((item) => {
-          console.log(item)
-             let liContent = document.createTextNode(`${item.nombre}`);
-             let liItem = document.createElement("li");
-             let deleteButton = document.createElement("button")
-             deleteButton.classList.add("button")
-             let textDeleteButton = document.createTextNode("Eliminar")
-             deleteButton.appendChild(textDeleteButton)
-             deleteButton.addEventListener("click", () => deleteItem(item))
-            let editButton = document.createElement("button")
-            editButton.classList.add("button")
-            let textEditButton = document.createTextNode("Editar")
-            editButton.appendChild(textEditButton)
-            editButton.addEventListener("click", () => editItem(item))
-            liItem.classList.add("list-item");
-             liItem.appendChild(liContent);
-             liItem.appendChild(deleteButton)
-               liItem.appendChild(editButton)
-             $("categoryUl").appendChild(liItem)  
-              
-      
-    });
+      for (let {nombre, id} of categoryList) {
+        $("categoryUl").innerHTML += `<li class= "is-flex is-justify-content-space-between">
+        <p> ${nombre} </p>
+        <div> 
+            <button  onclick="editItem('${id}')" id="${id}" class= "button"> Editar </button>
+            <button  onclick="deleteItem('${id}')" id="${id}" class= "button"> Eliminar </button>  
+        </div>
+        </li>`        
+    };
     }
+createList(categoryList)
+
+  const obtenerCategory = (idCategoria, categoryList) => {
+     return categoryList.find((categoria) => categoria.id === idCategoria)
+  } 
+
+
+  
 
 $ ("addButton").addEventListener("click", () => createArray(categoryList))
 $ ("addButton").addEventListener("click", createList(categoryList))
-$ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit())
-$ ("edit-button").addEventListener("click", () => updateItem())
+$ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
 
-// // Seccion categorias boton eliminar
- const deleteItem = (item) => {
- const itemIndex = categoryList.indexOf(item)
- categoryList.splice(itemIndex,1)
- createList(categoryList)
- }
+// // // Seccion categorias boton eliminar
+//   const deleteItem = (id, categoryList) => {
+//     return categoryList.filter((categoria) => categoria.id !== id);
+//   }
 
 
-// // Seccion categorias boton editar
-
-   const editItem = (item) => {
-    $("categorias-section").classList.add("hide-slide")
-    $("containerEdit").classList.remove("hide-slide");
-    }
+// // // Seccion categorias boton editar
+    const updateItem = (id) =>{
+        console.log(id)
+        let newCategory = {
+         id : id,
+         nombre: $("edit-input").value,
+        };
+        let updateCategories = getCategories().map((categoria) => 
+         categoria.id === id ? { ...newCategory } : categoria)
+        createList(updateCategories);
+        selectCategories(updateCategories)
+        setData({categorias: updateCategories})
+        } 
     
-    const updateItem = () =>{
-        let newValue = $("edit-input").value;
-        console.log(newValue)  
-        let itemIndex = categoryList.indexOf(item)    
+    const editItem = (id) => {
+     $("categorias-section").classList.add("hide-slide");
+     $("containerEdit").classList.remove("hide-slide");
+     let categoriaEditada =obtenerCategory(id, getCategories());
+    $("edit-input").value = categoriaEditada.nombre;
+    $("edit-button").addEventListener("click", () => updateItem(categoriaEditada.id));
+
     }
-    
+     
 
-const hideSeccionEdit = () => {
-    $("containerEdit").classList.add("hide-slide");
-    $("categorias-section").classList.remove("hide-slide")
-}
 
-// Seccion Operaciones
 
-// Filtros por categorias
+  const hideSeccionEdit = () => {
+    $("categorias-section").classList.remove("hide-slide");
+      $("containerEdit").classList.add("hide-slide");   
+  }
 
-const selectCategories = (categoryList) => {
-    $("categoria-select").innerHTML = ""
+
+
+
+// // Filtros por categorias
+
+ const selectCategories = (categoryList) => {
+    $$(".select-category").forEach((select) => {
+        select.innerHTML = "";
+    })
     $("categoria-select").innerHTML += ` <option value="Todas">Todas</option>`
-    for (let category of categoryList) {
-        let option = document.createElement("option")
-        option.innerHTML= `${category.nombre}`
-        $("categoria-select").appendChild(option)
+    $$(".select-category").forEach((select) => {
+        for (let {nombre,id} of categoryList) {
+            select.innerHTML += `<option value= "${id}"> ${nombre} </option>`
+     }
+    })
     }
-}
+    selectCategories(categoryList)
 
-selectCategories(categoryList)
+   createList(getCategories())
+ // // Seccion Operaciones
+
+const addOperation = () => {
+    let newOperation = {
+        id: randomID(),
+        description: $('input-description').value,
+        amount:  $("input-monto").value,
+        type:  $("select-type").value,
+        category:  $("select-category").value,
+        date:  $("input-date").value,
+    };
+console.log(newOperation);
+setData({ operaciones:[...getOperations(), newOperation] })
+console.log(getData());
+};
+
+$("addOperationButton").addEventListener("click",() => addOperation());
