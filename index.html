@@ -119,49 +119,48 @@
             <div id="container-operations-items" class=" container is-flex">
             </div>
             <!-- <div class="has-text-centered is-flex-direction-column pt-2 mt-6">
-                                                    <figure class="image is-3by1 mt-6 mb-6">
-                                                         <img src="/AhorrADAs/undraw_elements_re_25t9.svg" alt="wallet-icon" > -->
+                                                      <figure class="image is-3by1 mt-6 mb-6">
+                                                           <img src="/AhorrADAs/undraw_elements_re_25t9.svg" alt="wallet-icon" > -->
             <!-- </figure>
-                          <p class="has-text-weight-semibold is-size-4 mt-6">Sin resultados</p>
-                                                    <p class="mt-3 is-size-5">Cambia los filtros o agrega operaciones</p>
-                                                </div>  -->
+                            <p class="has-text-weight-semibold is-size-4 mt-6">Sin resultados</p>
+                                                      <p class="mt-3 is-size-5">Cambia los filtros o agrega operaciones</p>
+                                                  </div>  -->
           </div>
   
         </div>
       </div>
+      <section class="container has-background-light box mt-6 hide-slide" id="containerEditOperation">
+        <h2 class="has-text-weight-bold is-size-3">Editar operacion</h2>
+        <div class="field mt-6">
+          <label for="edit-operation-input">Descripcion</label>
+          <input id="edit-operation-input" type="text" class="input is-fullwidth">
+        </div>
+        <div class="field mt-6">
+          <label for="edit-amount-input">Monto</label>
+          <input id="edit-amount-input" type="number" class="input is-fullwidth">
+        </div>
+        <div class="field mt-6">
+          <label for="edit-type-input">Tipo</label>
+          <select id="edit-type-input">
+            <option value="gasto">Gasto</option>
+            <option value="ganancia">Ganancia</option>
+          </select>
+        </div>
+        <div class="field mt-6">
+          <label for="select-category">Categoria</label>
+          <select id="select-category" class="select-category">
+          </select>
+        </div>
+        <div class="field mt-6">
+          <label for="edit-date-input">Fecha</label>
+          <input id="edit-date-input" type="date">
+        </div>
+        <div class="is-justify-content-flex-end mt-6">
+          <button class="button">Cancelar</button>
+          <button class="button has-background-dark has-text-primary-light" id="edit-operation-button">Editar</button>
+        </div>
+      </section>
     </section>
-    <section class="container has-background-light box mt-6 hide-slide" id="containerEditOperation">
-      <h2 class="has-text-weight-bold is-size-3">Editar operacion</h2>
-      <div class="field mt-6">
-        <label for="edit-operation-input">Descripcion</label>
-        <input id="edit-operation-input" type="text" class="input is-fullwidth">
-      </div>
-      <div class="field mt-6">
-        <label for="edit-amount-input">Monto</label>
-        <input id="edit-amount-input" type="number" class="input is-fullwidth">
-      </div>
-      <div class="field mt-6">
-        <label for="edit-type-input">Tipo</label>
-        <select id="edit-type-input">
-          <option value="gasto">Gasto</option>
-          <option value="ganancia">Ganancia</option>
-        </select>
-      </div>
-      <div class="field mt-6">
-        <label for="select-category">Categoria</label>
-        <select id="select-category" class="select-category">
-        </select>
-      </div>
-      <div class="field mt-6">
-        <label for="edit-date-input">Fecha</label>
-        <input id="edit-date-input" type="date">
-      </div>
-      <div class="is-justify-content-flex-end mt-6">
-        <button class="button">Cancelar</button>
-        <button class="button has-background-dark has-text-primary-light" id="edit-operation-button">Editar</button>
-      </div>
-    </section>
-  
     <!-- termina seccion principal con asides y balance -->
     <!-- inicia seccion de nueva operacion -->
     <section class="nueva-operacion-section hide-slide" id="nueva-operacion-section">
