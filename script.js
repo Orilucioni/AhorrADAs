@@ -20,8 +20,9 @@ headerButtonCategorias.addEventListener("click", ()=>{
     mainContainer.classList.remove("show-slide");
     reportesSection.classList.add("hide-slide");
     reportesSection.classList.remove("show-slide");
-    nuevaOperacionSection.classList.add("hide-slide")
-    nuevaOperacionSection.classList.remove("show-slide")
+    nuevaOperacionSection.classList.add("hide-slide");
+    nuevaOperacionSection.classList.remove("show-slide");
+    containerEditOperation.classList.add("hide-slide")
     $("containerEdit").classList.add("hide-slide")
 });
 headerButtonReportes.addEventListener("click", ()=>{
@@ -34,6 +35,7 @@ headerButtonReportes.addEventListener("click", ()=>{
     nuevaOperacionSection.classList.add("hide-slide")
     nuevaOperacionSection.classList.remove("show-slide")
     $("containerEdit").classList.add("hide-slide")
+    containerEditOperation.classList.add("hide-slide")
 });
 headerButtonBalance.addEventListener("click", ()=>{  
     mainContainer.classList.add("show-slide");
@@ -45,6 +47,7 @@ headerButtonBalance.addEventListener("click", ()=>{
     nuevaOperacionSection.classList.add("hide-slide")
     nuevaOperacionSection.classList.remove("show-slide")
     $("containerEdit").classList.add("hide-slide")
+    containerEditOperation.classList.add("hide-slide")
 });
 nuevaOperacionButton.addEventListener("click", ()=>{  
     nuevaOperacionSection.classList.add("show-slide");
@@ -56,6 +59,7 @@ nuevaOperacionButton.addEventListener("click", ()=>{
     reportesSection.classList.add("hide-slide")
     reportesSection.classList.remove("show-slide")
     $("containerEdit").classList.add("hide-slide")
+    containerEditOperation.classList.add("hide-slide")
 })
 
 // Funciones relacionadas al Local Storage
@@ -71,7 +75,14 @@ nuevaOperacionButton.addEventListener("click", ()=>{
 
   const ahorradas = getData() || {
        categorias: [],
-       operaciones: [],
+       operaciones: [{
+        id: randomID(),
+        description: "fvdgfg",
+        amount:  "44545",
+        type:  "hfgh",
+        category:  "ggrgrtg",
+        date:  4444,
+    }],
     };
 
 const getCategories = () => {
@@ -141,11 +152,14 @@ createList(categoryList)
   const obtenerCategory = (idCategoria, categoryList) => {
      return categoryList.find((categoria) => categoria.id === idCategoria)
   } 
+  const obtenerOperation = (idOperation, operationsList) => {
+    return operationsList.find((operation) => operation.id === idOperation)
+ } 
+ 
 $ ("addButton").addEventListener("click", () => createArray(categoryList))
 $ ("addButton").addEventListener("click", createList(categoryList))
-// $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit())
 // $ ("edit-button").addEventListener("click", () => updateItem())
-$ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
+// $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
 
 // // // Seccion categorias boton eliminar
 //   const deleteItem = (id, categoryList) => {
@@ -234,26 +248,52 @@ const createOperations = () => {
           <p class="is-size-6">${amount}</p>
         </div>
         <div class="column is-2 is flex is-flex-direction-column ">
-            <button onclick="editItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
+            <button onclick="editOperationItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
             <button onclick="deleteItem('${id}')" id="${id}" class=" is-size-6"> Eliminar </button>
         </div>`
     }
 }
 
-createOperations(categoryList)
-const addOperation = () => {
-    let newOperation = {
-        id: randomID(),
-        description: $('input-description').value,
-        amount:  $("input-monto").value,
-        type:  $("select-type").value,
-        category:  $("select-category").value,
-        date:  $("input-date").value,
-    };
-console.log(newOperation);
-createOperations(getOperations())
-setData({ operaciones: [...getOperations(), newOperation] });
-console.log(getData());
-$("addOperationButton").addEventListener("click", addOperation);
-};
+createOperations(operationsList)
+ const addOperation = () => {
+     let newOperation = {
+         id: randomID(),
+         description: $('input-description').value,
+         amount:  $("input-monto").value,
+         type:  $("select-type").value,
+         category:  $("select-category").value,
+         date:  $("input-date").value,
+     };
+ console.log(newOperation);
+ createOperations(getOperations())
+ setData({ operaciones: [...getOperations(), newOperation] });
+ console.log(getData());
+ };
 
+ const updateItemOperations = (id) =>{
+     console.log(id)
+     let newOperations = {
+     id : id,
+     description: $('input-description').value,
+     amount:  $("input-monto").value,
+     type:  $("select-type").value,
+     category:  $("select-category").value,
+     date:  $("input-date").value,
+     };
+     let updateOperations = getOperations().map((operation) => 
+      categoria.id === id ? { ...newOperations } : operation)
+     createOperations(updateOperations);
+     setData({operaciones: updateOperations})
+     } 
+
+     const editOperationItem = (id) => {
+         $("boxes-operation-balance-filters").classList.add("hide-slide");
+         $("containerEditOperation").classList.remove("hide-slide");
+         let operacionEditada = obtenerCategory(id, getCategories());
+        $("edit-operation-input").value = operacionEditada.description;
+        $("edit-amount-input").value = operacionEditada.amount;
+        $("select-type").value = operacionEditada.type;
+        $("select-category").value = operacionEditada.category;
+        $("input-date").value = operacionEditada.date;
+        $("edit-operation-button").addEventListener("click", () => updateItemOperations(operacionEditada.id));
+        }
