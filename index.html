@@ -89,23 +89,47 @@
                       </div>
                   </div>
                   <div class="operaciones-container column box is-half">
-                      <div class="operaciones-items pt-4">
-                          <div class="button-space">
-                              <h2 class="has-text-weight-bold is-size-3">Operaciones</h2>
-                              <div>
-                                  <button class="nueva-operacion button is-small is-info is-right" id="nueva-operacion">+ Nueva operacion</button>
-                              </div>
-                          </div>
-                          <div class="has-text-centered is-flex-direction-column pt-2 mt-6">
-                              <figure class="image is-3by1 mt-6 mb-6">
-                                  <!-- <img src="/AhorrADAs/undraw_elements_re_25t9.svg" alt="wallet-icon" > -->
-                              </figure>
-                              <p class="has-text-weight-semibold is-size-4 mt-6">Sin resultados</p>
-                              <p class="mt-3 is-size-5">Cambia los filtros o agrega operaciones</p>
-                          </div>
+                    <div class="operaciones-items pt-4">
+                      <div class="button-space">
+                        <h2 class="has-text-weight-bold is-size-3">Operaciones</h2>
+                        <div>
+                          <button class="nueva-operacion button is-small is-info is-right" id="nueva-operacion">+ Nueva operacion</button>
+                        </div>
                       </div>
+                      <div class="container is-flex mt-3">
+                        <div class="column is-3">
+                          <h5 class="has-text-weight-bold">Descripcion</h5>
+                        </div>
+                        <div class="column is-3 ">
+                          <h5 class="has-text-weight-bold">Categoria</h5>
+                        </div>
+                        <div class="column is-2 ">
+                          <h5 class="has-text-weight-bold">Fecha</h5>
+                        </div>
+                        <div class="column is-2 ">
+                          <h5 class="has-text-weight-bold">Monto</h5>
+                        </div>
+                        <div class="column is-2 ">
+                          <h5 class="has-text-weight-bold">Acciones</h5>
+                          <!-- <div class=" is-flex-direction-column ">
+                                              <button onclick="editItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
+                                              <button onclick="deleteItem('${id}')" id="${id}" class=" is-size-6"> Eliminar </button>
+                                            </div>  -->
+                        </div>
+                      </div>
+                      <div id="container-operations-items" class=" container is-flex">
+
+                      </div> 
+                      <!-- <div class="has-text-centered is-flex-direction-column pt-2 mt-6">
+                                                <figure class="image is-3by1 mt-6 mb-6">
+                                                     <img src="/AhorrADAs/undraw_elements_re_25t9.svg" alt="wallet-icon" > -->
+                      <!-- </figure>
+                      <p class="has-text-weight-semibold is-size-4 mt-6">Sin resultados</p>
+                                                <p class="mt-3 is-size-5">Cambia los filtros o agrega operaciones</p>
+                                            </div>  -->
+                    </div>
                   </div>
-              </div>
+                  </div>
             </section>
             <!-- termina seccion principal con asides y balance -->
             <!-- inicia seccion de nueva operacion -->

@@ -1,4 +1,5 @@
 const $ = (selector) => document.getElementById(selector);
+
 const $$ = (selector) => document.querySelectorAll(selector)
 //botones del header para visibilizar distintas areas
 //variables de botones del header
@@ -11,7 +12,6 @@ const mainContainer = document.getElementById("main-container");
 const nuevaOperacionSection = document.getElementById("nueva-operacion-section");
 const categoriasSection = document.getElementById("categorias-section");
 const reportesSection = document.getElementById("reportes-section");
-
 //eventos de click para cambios en la visibilidad de las secciones
 headerButtonCategorias.addEventListener("click", ()=>{ 
     categoriasSection.classList.add("show-slide")
@@ -60,52 +60,53 @@ nuevaOperacionButton.addEventListener("click", ()=>{
 
 // Funciones relacionadas al Local Storage
 
-
  const getData = () => {
-     return JSON.parse(localStorage.getItem("ahorradas"))
- }
-  
+     return JSON.parse(localStorage.getItem("ahorradas"));
+ };
+
  const setData = (datos) => {
      localStorage.setItem("ahorradas", JSON.stringify({...getData(), ...datos}))
- }
+ };
+
+
+  const ahorradas = getData() || {
+       categorias: [],
+       operaciones: [],
+    };
+
 const getCategories = () => {
-     return getData().categorias;
- }
+     return getData()?.categorias;
+ };
 
  const getOperations = () => {
      return getData()?.operaciones;
  }
 
-//  const ahorradas = getData() || {
-//       categorias: [],
-//        operaciones: [],
-//    }
-
- 
 
 // Realizamos la creacion de las categorias
 const randomID = () => self.crypto.randomUUID()
 
+
 let categoryList = getCategories() || [  
     {
-        nombre: "Servicio",
+        nombre:"Servicio",
         id: randomID(),
     },
     {
-        nombre: "Salidas",
+        nombre:"Salidas",
         id: randomID(),
     },
     {
-        nombre: "Educacion",
+        nombre:"Educacion",
         id: randomID(),
     },
     {   
-        nombre: "Transporte",
+        nombre:"Transporte",
         id: randomID(),
     },
     {
-        nombre: "Trabajo",
-        id: randomID(),
+        nombre:"Trabajo",
+        id: randomID()
     },
      ];
 
@@ -120,7 +121,7 @@ const createArray = (lista) => {
      selectCategories(categoryList)
 }
 
-console.log(categoryList)
+
 
 const createList = (categoryList)=> {
     console.log(categoryList);
@@ -140,12 +141,10 @@ createList(categoryList)
   const obtenerCategory = (idCategoria, categoryList) => {
      return categoryList.find((categoria) => categoria.id === idCategoria)
   } 
-
-
-  
-
 $ ("addButton").addEventListener("click", () => createArray(categoryList))
 $ ("addButton").addEventListener("click", createList(categoryList))
+// $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit())
+// $ ("edit-button").addEventListener("click", () => updateItem())
 $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
 
 // // // Seccion categorias boton eliminar
@@ -167,18 +166,21 @@ $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
         selectCategories(updateCategories)
         setData({categorias: updateCategories})
         } 
-    
+
     const editItem = (id) => {
      $("categorias-section").classList.add("hide-slide");
      $("containerEdit").classList.remove("hide-slide");
      let categoriaEditada =obtenerCategory(id, getCategories());
     $("edit-input").value = categoriaEditada.nombre;
     $("edit-button").addEventListener("click", () => updateItem(categoriaEditada.id));
-
     }
-     
 
 
+
+//  const hideSeccionEdit = () => {
+//      $("containerEdit").classList.add("hide-slide");
+//      $("categorias-section").classList.remove("hide-slide")
+//  }
 
   const hideSeccionEdit = () => {
     $("categorias-section").classList.remove("hide-slide");
@@ -201,11 +203,44 @@ $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
      }
     })
     }
+
     selectCategories(categoryList)
+    createList(getCategories())
 
-   createList(getCategories())
  // // Seccion Operaciones
+let operationsList = [{
+    id: randomID(),
+    description: "fvdgfg",
+    amount:  "44545",
+    type:  "hfgh",
+    category:  "ggrgrtg",
+    date:  4444,
+}];
 
+const createOperations = () => {
+    $("container-operations-items").innerHTML=""
+    for (let{description, id, amount, category,date} of operationsList) {
+        $("container-operations-items").innerHTML += `
+        <div class="column is-3">
+          <p class="is-size-6">${description}</p>
+        </div>
+        <div class="column is-3 ">
+          <p class="is-size-6">${category}</p>
+        </div>
+        <div class="column is-2 ">
+          <p class="is-size-6">${date}</p>
+        </div>
+        <div class="column is-2 ">
+          <p class="is-size-6">${amount}</p>
+        </div>
+        <div class="column is-2 is flex is-flex-direction-column ">
+            <button onclick="editItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
+            <button onclick="deleteItem('${id}')" id="${id}" class=" is-size-6"> Eliminar </button>
+        </div>`
+    }
+}
+
+createOperations(categoryList)
 const addOperation = () => {
     let newOperation = {
         id: randomID(),
@@ -216,8 +251,9 @@ const addOperation = () => {
         date:  $("input-date").value,
     };
 console.log(newOperation);
-setData({ operaciones:[...getOperations(), newOperation] })
+createOperations(getOperations())
+setData({ operaciones: [...getOperations(), newOperation] });
 console.log(getData());
+$("addOperationButton").addEventListener("click", addOperation);
 };
 
-$("addOperationButton").addEventListener("click",() => addOperation());
