@@ -1,4 +1,5 @@
 const $ = (selector) => document.getElementById(selector);
+
 const $$ = (selector) => document.querySelectorAll(selector)
 //botones del header para visibilizar distintas areas
 //variables de botones del header
@@ -11,7 +12,6 @@ const mainContainer = document.getElementById("main-container");
 const nuevaOperacionSection = document.getElementById("nueva-operacion-section");
 const categoriasSection = document.getElementById("categorias-section");
 const reportesSection = document.getElementById("reportes-section");
-
 //eventos de click para cambios en la visibilidad de las secciones
 headerButtonCategorias.addEventListener("click", ()=>{ 
     categoriasSection.classList.add("show-slide")
@@ -20,8 +20,9 @@ headerButtonCategorias.addEventListener("click", ()=>{
     mainContainer.classList.remove("show-slide");
     reportesSection.classList.add("hide-slide");
     reportesSection.classList.remove("show-slide");
-    nuevaOperacionSection.classList.add("hide-slide")
-    nuevaOperacionSection.classList.remove("show-slide")
+    nuevaOperacionSection.classList.add("hide-slide");
+    nuevaOperacionSection.classList.remove("show-slide");
+    containerEditOperation.classList.add("hide-slide")
     $("containerEdit").classList.add("hide-slide")
 });
 headerButtonReportes.addEventListener("click", ()=>{
@@ -34,6 +35,7 @@ headerButtonReportes.addEventListener("click", ()=>{
     nuevaOperacionSection.classList.add("hide-slide")
     nuevaOperacionSection.classList.remove("show-slide")
     $("containerEdit").classList.add("hide-slide")
+    containerEditOperation.classList.add("hide-slide")
 });
 headerButtonBalance.addEventListener("click", ()=>{  
     mainContainer.classList.add("show-slide");
@@ -45,6 +47,7 @@ headerButtonBalance.addEventListener("click", ()=>{
     nuevaOperacionSection.classList.add("hide-slide")
     nuevaOperacionSection.classList.remove("show-slide")
     $("containerEdit").classList.add("hide-slide")
+    containerEditOperation.classList.add("hide-slide")
 });
 nuevaOperacionButton.addEventListener("click", ()=>{  
     nuevaOperacionSection.classList.add("show-slide");
@@ -56,56 +59,65 @@ nuevaOperacionButton.addEventListener("click", ()=>{
     reportesSection.classList.add("hide-slide")
     reportesSection.classList.remove("show-slide")
     $("containerEdit").classList.add("hide-slide")
+    containerEditOperation.classList.add("hide-slide")
 })
 
 // Funciones relacionadas al Local Storage
 
-
  const getData = () => {
-     return JSON.parse(localStorage.getItem("ahorradas"))
- }
-  
+     return JSON.parse(localStorage.getItem("ahorradas"));
+ };
+
  const setData = (datos) => {
      localStorage.setItem("ahorradas", JSON.stringify({...getData(), ...datos}))
- }
+ };
+
+
+  const ahorradas = getData() || {
+       categorias: [],
+       operaciones: [{
+        id: randomID(),
+        description: "fvdgfg",
+        amount:  "44545",
+        type:  "hfgh",
+        category:  "ggrgrtg",
+        date:  4444,
+    }],
+    };
+
 const getCategories = () => {
-     return getData().categorias;
- }
+     return getData()?.categorias;
+ };
 
  const getOperations = () => {
      return getData()?.operaciones;
  }
 
-//  const ahorradas = getData() || {
-//       categorias: [],
-//        operaciones: [],
-//    }
-
- 
 
 // Realizamos la creacion de las categorias
 const randomID = () => self.crypto.randomUUID()
 
+
 let categoryList = getCategories() || [  
     {
-        nombre: "Servicio",
+        nombre:"Servicio",
         id: randomID(),
     },
     {
-        nombre: "Salidas",
+        nombre:"Salidas",
         id: randomID(),
     },
     {
-        nombre: "Educacion",
+        nombre:"Educacion",
         id: randomID(),
     },
     {   
-        nombre: "Transporte",
+        nombre:"Transporte",
         id: randomID(),
     },
     {
-        nombre: "Trabajo",
-        id: randomID(),
+        nombre:"Trabajo",
+        id: randomID()
     },
      ];
 
@@ -120,7 +132,7 @@ const createArray = (lista) => {
      selectCategories(categoryList)
 }
 
-console.log(categoryList)
+
 
 const createList = (categoryList)=> {
     console.log(categoryList);
@@ -140,13 +152,14 @@ createList(categoryList)
   const obtenerCategory = (idCategoria, categoryList) => {
      return categoryList.find((categoria) => categoria.id === idCategoria)
   } 
-
-
-  
-
+  const obtenerOperation = (idOperation, operationsList) => {
+    return operationsList.find((operation) => operation.id === idOperation)
+ } 
+ 
 $ ("addButton").addEventListener("click", () => createArray(categoryList))
 $ ("addButton").addEventListener("click", createList(categoryList))
-$ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
+// $ ("edit-button").addEventListener("click", () => updateItem())
+// $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
 
 // // // Seccion categorias boton eliminar
 //   const deleteItem = (id, categoryList) => {
@@ -167,18 +180,21 @@ $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
         selectCategories(updateCategories)
         setData({categorias: updateCategories})
         } 
-    
+
     const editItem = (id) => {
      $("categorias-section").classList.add("hide-slide");
      $("containerEdit").classList.remove("hide-slide");
      let categoriaEditada =obtenerCategory(id, getCategories());
     $("edit-input").value = categoriaEditada.nombre;
     $("edit-button").addEventListener("click", () => updateItem(categoriaEditada.id));
-
     }
-     
 
 
+
+//  const hideSeccionEdit = () => {
+//      $("containerEdit").classList.add("hide-slide");
+//      $("categorias-section").classList.remove("hide-slide")
+//  }
 
   const hideSeccionEdit = () => {
     $("categorias-section").classList.remove("hide-slide");
@@ -201,23 +217,83 @@ $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
      }
     })
     }
+
     selectCategories(categoryList)
+    createList(getCategories())
 
-   createList(getCategories())
  // // Seccion Operaciones
+let operationsList = [{
+    id: randomID(),
+    description: "fvdgfg",
+    amount:  "44545",
+    type:  "hfgh",
+    category:  "ggrgrtg",
+    date:  4444,
+}];
 
-const addOperation = () => {
-    let newOperation = {
-        id: randomID(),
-        description: $('input-description').value,
-        amount:  $("input-monto").value,
-        type:  $("select-type").value,
-        category:  $("select-category").value,
-        date:  $("input-date").value,
-    };
-console.log(newOperation);
-setData({ operaciones:[...getOperations(), newOperation] })
-console.log(getData());
-};
+const createOperations = () => {
+    $("container-operations-items").innerHTML=""
+    for (let{description, id, amount, category,date} of operationsList) {
+        $("container-operations-items").innerHTML += `
+        <div class="column is-3">
+          <p class="is-size-6">${description}</p>
+        </div>
+        <div class="column is-3 ">
+          <p class="is-size-6">${category}</p>
+        </div>
+        <div class="column is-2 ">
+          <p class="is-size-6">${date}</p>
+        </div>
+        <div class="column is-2 ">
+          <p class="is-size-6">${amount}</p>
+        </div>
+        <div class="column is-2 is flex is-flex-direction-column ">
+            <button onclick="editOperationItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
+            <button onclick="deleteItem('${id}')" id="${id}" class=" is-size-6"> Eliminar </button>
+        </div>`
+    }
+}
 
-$("addOperationButton").addEventListener("click",() => addOperation());
+createOperations(operationsList)
+ const addOperation = () => {
+     let newOperation = {
+         id: randomID(),
+         description: $('input-description').value,
+         amount:  $("input-monto").value,
+         type:  $("select-type").value,
+         category:  $("select-category").value,
+         date:  $("input-date").value,
+     };
+ console.log(newOperation);
+ createOperations(getOperations())
+ setData({ operaciones: [...getOperations(), newOperation] });
+ console.log(getData());
+ };
+
+ const updateItemOperations = (id) =>{
+     console.log(id)
+     let newOperations = {
+     id : id,
+     description: $('input-description').value,
+     amount:  $("input-monto").value,
+     type:  $("select-type").value,
+     category:  $("select-category").value,
+     date:  $("input-date").value,
+     };
+     let updateOperations = getOperations().map((operation) => 
+      categoria.id === id ? { ...newOperations } : operation)
+     createOperations(updateOperations);
+     setData({operaciones: updateOperations})
+     } 
+
+     const editOperationItem = (id) => {
+         $("boxes-operation-balance-filters").classList.add("hide-slide");
+         $("containerEditOperation").classList.remove("hide-slide");
+         let operacionEditada = obtenerCategory(id, getCategories());
+        $("edit-operation-input").value = operacionEditada.description;
+        $("edit-amount-input").value = operacionEditada.amount;
+        $("select-type").value = operacionEditada.type;
+        $("select-category").value = operacionEditada.category;
+        $("input-date").value = operacionEditada.date;
+        $("edit-operation-button").addEventListener("click", () => updateItemOperations(operacionEditada.id));
+        }
