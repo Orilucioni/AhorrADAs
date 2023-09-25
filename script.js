@@ -73,17 +73,6 @@ nuevaOperacionButton.addEventListener("click", ()=>{
  };
 
 
-  const ahorradas = getData() || {
-       categorias: [],
-       operaciones: [{
-        id: randomID(),
-        description: "fvdgfg",
-        amount:  "44545",
-        type:  "hfgh",
-        category:  "ggrgrtg",
-        date:  4444,
-    }],
-    };
 
 const getCategories = () => {
      return getData()?.categorias;
@@ -121,20 +110,20 @@ let categoryList = getCategories() || [
     },
      ];
 
+setData({categorias: categoryList});
 
 const createArray = (lista) => {
      let newItem ={
          "nombre": $("inputName").value ,
          "id": randomID()
-     }
-     categoryList.push(newItem)
-     createList(categoryList)
-     selectCategories(categoryList)
-}
+     };
+     categoryList.push(newItem);
+     createList(categoryList);
+     selectCategories(categoryList);
+     setData({categorias: categoryList});
+     };
 
-
-
-const createList = (categoryList)=> {
+const createList = (lista) => {
     console.log(categoryList);
       $("categoryUl").innerHTML = "";
       for (let {nombre, id} of categoryList) {
@@ -146,14 +135,14 @@ const createList = (categoryList)=> {
         </div>
         </li>`        
     };
-    }
-createList(categoryList)
+    };
+createList(categoryList);
 
   const obtenerCategory = (idCategoria, categoryList) => {
      return categoryList.find((categoria) => categoria.id === idCategoria)
   } 
-  const obtenerOperation = (idOperation, operationsList) => {
-    return operationsList.find((operation) => operation.id === idOperation)
+  const obtenerOperation = (idOperation, operationList) => {
+    return operationList.find((operation) => operation.id === idOperation)
  } 
  
 $ ("addButton").addEventListener("click", () => createArray(categoryList))
@@ -196,10 +185,10 @@ $ ("addButton").addEventListener("click", createList(categoryList))
 //      $("categorias-section").classList.remove("hide-slide")
 //  }
 
-  const hideSeccionEdit = () => {
-    $("categorias-section").classList.remove("hide-slide");
-      $("containerEdit").classList.add("hide-slide");   
-  }
+//   const hideSeccionEdit = () => {
+//     $("categorias-section").classList.remove("hide-slide");
+//       $("containerEdit").classList.add("hide-slide");   
+//   }
 
 
 
@@ -221,20 +210,34 @@ $ ("addButton").addEventListener("click", createList(categoryList))
     selectCategories(categoryList)
     createList(getCategories())
 
- // // Seccion Operaciones
-let operationsList = [{
-    id: randomID(),
-    description: "fvdgfg",
-    amount:  "44545",
-    type:  "hfgh",
-    category:  "ggrgrtg",
-    date:  4444,
-}];
+
+let operationList = getOperations() || []
+console.log (operationList)
+ const addOperation = () => {
+
+     let newOperation = {
+         id: randomID(),
+         description: $('input-description').value,
+         amount:  $("input-monto").value,
+         type:  $("select-type").value,
+         category:  $("select-category").value,
+         date:  $("input-date-operation").value,
+     };
+ 
+ operationList.push(newOperation)
+ console.log(operationList)
+ createOperations(operationList)
+setData({ operaciones: [...operationList] }); 
+ console.log(getData());
+ };
+
+ $("addOperationButton").addEventListener("click", addOperation);
 
 const createOperations = () => {
     $("container-operations-items").innerHTML=""
-    for (let{description, id, amount, category,date} of operationsList) {
+    for (let {description, id, amount, category,date} of operationList) {
         $("container-operations-items").innerHTML += `
+        <div class="columns">
         <div class="column is-3">
           <p class="is-size-6">${description}</p>
         </div>
@@ -248,27 +251,14 @@ const createOperations = () => {
           <p class="is-size-6">${amount}</p>
         </div>
         <div class="column is-2 is flex is-flex-direction-column ">
-            <button onclick="editOperationItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
-            <button onclick="deleteItem('${id}')" id="${id}" class=" is-size-6"> Eliminar </button>
-        </div>`
+          <button onclick="editOperationItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
+          <button onclick="deleteItem('${id}')" id="${id}" class=" is-size-6"> Eliminar </button>
+        </div>
+      </div>`
     }
 }
 
-createOperations(operationsList)
- const addOperation = () => {
-     let newOperation = {
-         id: randomID(),
-         description: $('input-description').value,
-         amount:  $("input-monto").value,
-         type:  $("select-type").value,
-         category:  $("select-category").value,
-         date:  $("input-date").value,
-     };
- console.log(newOperation);
- createOperations(getOperations())
- setData({ operaciones: [...getOperations(), newOperation] });
- console.log(getData());
- };
+createOperations(operationList)
 
  const updateItemOperations = (id) =>{
      console.log(id)
