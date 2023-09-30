@@ -62,6 +62,19 @@ nuevaOperacionButton.addEventListener("click", ()=>{
     containerEditOperation.classList.add("hide-slide")
 })
 
+// Funcion para inicializar
+
+
+ 
+const inicializar = () => {
+    createList(categoryList);
+    selectCategories(categoryList)
+    createList(getCategories())
+    createOperations(operationList)
+};
+
+
+    window.onload = inicializar
 // Funciones relacionadas al Local Storage
 
  const getData = () => {
@@ -136,7 +149,7 @@ const createList = (lista) => {
         </li>`        
     };
     };
-createList(categoryList);
+
 
   const obtenerCategory = (idCategoria, categoryList) => {
      return categoryList.find((categoria) => categoria.id === idCategoria)
@@ -193,7 +206,7 @@ $ ("addButton").addEventListener("click", createList(categoryList))
 
 
 
-// // Filtros por categorias
+// // Llenar select categorias
 
  const selectCategories = (categoryList) => {
     $$(".select-category").forEach((select) => {
@@ -207,12 +220,14 @@ $ ("addButton").addEventListener("click", createList(categoryList))
     })
     }
 
-    selectCategories(categoryList)
-    createList(getCategories())
+  
 
+// Seccion operaciones
 
 let operationList = getOperations() || []
+
 console.log (operationList)
+
  const addOperation = () => {
 
      let newOperation = {
@@ -220,7 +235,7 @@ console.log (operationList)
          description: $('input-description').value,
          amount:  $("input-monto").value,
          type:  $("select-type").value,
-         category:  $("select-category").value,
+         category:  $("new-operation-category").value,
          date:  $("input-date-operation").value,
      };
  
@@ -228,14 +243,13 @@ console.log (operationList)
  console.log(operationList)
  createOperations(operationList)
 setData({ operaciones: [...operationList] }); 
- console.log(getData());
  };
 
  $("addOperationButton").addEventListener("click", addOperation);
 
-const createOperations = () => {
-    $("container-operations-items").innerHTML=""
-    for (let {description, id, amount, category,date} of operationList) {
+const createOperations = (lista) => {
+    $("container-operations-items").innerHTML= ""
+    for (let {description, id, amount, category,date} of lista) {
         $("container-operations-items").innerHTML += `
         <div class="columns">
         <div class="column is-3">
@@ -248,7 +262,7 @@ const createOperations = () => {
           <p class="is-size-6">${date}</p>
         </div>
         <div class="column is-2 ">
-          <p class="is-size-6">${amount}</p>
+          <p class="is-size-6">$${amount}</p>
         </div>
         <div class="column is-2 is flex is-flex-direction-column ">
           <button onclick="editOperationItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
@@ -257,8 +271,6 @@ const createOperations = () => {
       </div>`
     }
 }
-
-createOperations(operationList)
 
  const updateItemOperations = (id) =>{
      console.log(id)
@@ -287,3 +299,48 @@ createOperations(operationList)
         $("input-date").value = operacionEditada.date;
         $("edit-operation-button").addEventListener("click", () => updateItemOperations(operacionEditada.id));
         }
+
+
+
+        // Seccion filtros
+        
+
+        const filterType = (operationList, typeOfOperation) => {
+             let filterrType = operationList.filter((operation) => operation.type.toLowerCase() === typeOfOperation.toLowerCase());
+        console.log(filterrType)
+        return filterrType;
+        
+        };
+
+        const filterCategory = (operationList, categories) => {
+             let filterrCategory = operationList.filter((operation) => operation.category === categories);
+        console.log(filterrCategory) 
+        return filterrCategory;
+        }
+
+        const applyFilters = () => {
+            let operacionesFiltradas = [...operationList];
+            let filtersType = $("tipo-select").value;
+            console.log(filtersType);
+            let filtersCategories = $("categoria-select").value;
+            console.log(filtersCategories);
+            
+
+            if (filtersType != "Todos") {
+                operacionesFiltradas= filterType(operationList, filtersType);
+                return operacionesFiltradas
+             };
+
+            operacionesFiltradas= filterCategory(operationList, filtersCategories); 
+            
+            console.log(operacionesFiltradas);
+            createOperations(operacionesFiltradas);
+            }
+
+
+        $("tipo-select").addEventListener("change", () => applyFilters());
+        $("categoria-select").addEventListener("change", () => applyFilters());
+
+
+
+// nueva operacion y editar operacion tienen  select-category como id
