@@ -66,15 +66,7 @@ nuevaOperacionButton.addEventListener("click", ()=>{
 
 
  
-const inicializar = () => {
-    createList(categoryList);
-    selectCategories(categoryList)
-    createList(getCategories())
-    createOperations(operationList)
-};
 
-
-    window.onload = inicializar
 // Funciones relacionadas al Local Storage
 
  const getData = () => {
@@ -94,6 +86,7 @@ const getCategories = () => {
  const getOperations = () => {
      return getData()?.operaciones;
  }
+
 
 
 // Realizamos la creacion de las categorias
@@ -123,7 +116,7 @@ let categoryList = getCategories() || [
     },
      ];
 
-setData({categorias: categoryList});
+// setData({categorias: categoryList});
 
 const createArray = (lista) => {
      let newItem ={
@@ -131,42 +124,50 @@ const createArray = (lista) => {
          "id": randomID()
      };
      categoryList.push(newItem);
-     createList(categoryList);
-     selectCategories(categoryList);
      setData({categorias: categoryList});
+     updatePage(getData());
+    //  createList(categoryList);
+    //  selectCategories(categoryList);
+     
      };
 
 const createList = (lista) => {
     console.log(categoryList);
       $("categoryUl").innerHTML = "";
-      for (let {nombre, id} of categoryList) {
+      for (let {nombre, id} of lista) {
         $("categoryUl").innerHTML += `<li class= "is-flex is-justify-content-space-between">
         <p> ${nombre} </p>
         <div> 
             <button  onclick="editItem('${id}')" id="${id}" class= "button"> Editar </button>
-            <button  onclick="deleteItem('${id}')" id="${id}" class= "button"> Eliminar </button>  
+            <button  onclick="deleteItem('${id}', categoryList)" id="${id}" class= "button"> Eliminar </button>  
         </div>
         </li>`        
     };
     };
 
 
-  const obtenerCategory = (idCategoria, categoryList) => {
+  const obtenerCategory = (idCategoria, arrayCategories) => {
      return categoryList.find((categoria) => categoria.id === idCategoria)
-  } 
-  const obtenerOperation = (idOperation, operationList) => {
+  }; 
+  const obtenerOperation = (idOperation, arrayOperations) => {
     return operationList.find((operation) => operation.id === idOperation)
- } 
+ }; 
  
-$ ("addButton").addEventListener("click", () => createArray(categoryList))
-$ ("addButton").addEventListener("click", createList(categoryList))
+$ ("addButton").addEventListener("click", () => createArray(categoryList));
+$ ("addButton").addEventListener("click", createList(categoryList));
 // $ ("edit-button").addEventListener("click", () => updateItem())
 // $ ("cancelledButtton").addEventListener("click", () => hideSeccionEdit)
 
 // // // Seccion categorias boton eliminar
-//   const deleteItem = (id, categoryList) => {
-//     return categoryList.filter((categoria) => categoria.id !== id);
-//   }
+   const deleteItem = (id, categoryList) => {
+     let newList = categoryList.filter((categoria) => categoria.id !== id);
+     console.log(newList);
+     setData({categorias: newList});
+    updatePage(getData());
+     //  createList(newList);
+    //  selectCategories(newList);
+     
+  };
 
 
 // // // Seccion categorias boton editar
@@ -177,16 +178,18 @@ $ ("addButton").addEventListener("click", createList(categoryList))
          nombre: $("edit-input").value,
         };
         let updateCategories = getCategories().map((categoria) => 
-         categoria.id === id ? { ...newCategory } : categoria)
-        createList(updateCategories);
-        selectCategories(updateCategories)
-        setData({categorias: updateCategories})
+         categoria.id === id ? { ...newCategory } : categoria);
+        setData({categorias: updateCategories});
+        updatePage(getData())
+        // createList(updateCategories);
+        // selectCategories(updateCategories);
+        
         } 
 
     const editItem = (id) => {
      $("categorias-section").classList.add("hide-slide");
      $("containerEdit").classList.remove("hide-slide");
-     let categoriaEditada =obtenerCategory(id, getCategories());
+     let categoriaEditada = obtenerCategory(id, getCategories());
     $("edit-input").value = categoriaEditada.nombre;
     $("edit-button").addEventListener("click", () => updateItem(categoriaEditada.id));
     }
@@ -224,9 +227,9 @@ $ ("addButton").addEventListener("click", createList(categoryList))
 
 // Seccion operaciones
 
-let operationList = getOperations() || []
+let operationList = getOperations() || [] ;
 
-console.log (operationList)
+console.log (operationList);
 
  const addOperation = () => {
 
@@ -266,39 +269,39 @@ const createOperations = (lista) => {
         </div>
         <div class="column is-2 is flex is-flex-direction-column ">
           <button onclick="editOperationItem('${id}')" id="${id}" class=" is-size-6"> Editar </button>
-          <button onclick="deleteItem('${id}')" id="${id}" class=" is-size-6"> Eliminar </button>
+          <button onclick="deleteOperationItem('${id}')" id="${id}" class=" is-size-6"> Eliminar </button>
         </div>
       </div>`
     }
-}
+};
 
  const updateItemOperations = (id) =>{
      console.log(id)
      let newOperations = {
      id : id,
-     description: $('input-description').value,
-     amount:  $("input-monto").value,
-     type:  $("select-type").value,
+     description: $('edit-operation-input').value,
+     amount:  $("edit-amount-input").value,
+     type:  $("edit-type-input").value,
      category:  $("select-category").value,
-     date:  $("input-date").value,
+     date:  $("edit-date-input").value,
      };
      let updateOperations = getOperations().map((operation) => 
-      categoria.id === id ? { ...newOperations } : operation)
+      operation.id === id ? { ...newOperations } : operation);
      createOperations(updateOperations);
-     setData({operaciones: updateOperations})
-     } 
+     setData({operaciones: updateOperations});
+     }; 
 
      const editOperationItem = (id) => {
          $("boxes-operation-balance-filters").classList.add("hide-slide");
          $("containerEditOperation").classList.remove("hide-slide");
-         let operacionEditada = obtenerCategory(id, getCategories());
+         let operacionEditada = obtenerOperation(id, getOperations());
         $("edit-operation-input").value = operacionEditada.description;
         $("edit-amount-input").value = operacionEditada.amount;
-        $("select-type").value = operacionEditada.type;
+        $("edit-type-input").value = operacionEditada.type;
         $("select-category").value = operacionEditada.category;
-        $("input-date").value = operacionEditada.date;
+        $("edit-date-input").value = operacionEditada.date;
         $("edit-operation-button").addEventListener("click", () => updateItemOperations(operacionEditada.id));
-        }
+        };
 
 
 
@@ -316,7 +319,7 @@ const createOperations = (lista) => {
              let filterrCategory = operationList.filter((operation) => operation.category === categories);
         console.log(filterrCategory) 
         return filterrCategory;
-        }
+        };
 
         const applyFilters = () => {
             let operacionesFiltradas = [...operationList];
@@ -341,6 +344,18 @@ const createOperations = (lista) => {
         $("tipo-select").addEventListener("change", () => applyFilters());
         $("categoria-select").addEventListener("change", () => applyFilters());
 
+        
+            
+const inicializar = () => {
+    createList(categoryList);
+    selectCategories(categoryList);
+    createOperations(operationList);
+};
 
+    window.onload = inicializar
 
-// nueva operacion y editar operacion tienen  select-category como id
+    const updatePage = (datos) => {
+        createList(datos.categorias);
+        selectCategories(datos.categorias);
+        createOperations(datos.operaciones);
+    };
